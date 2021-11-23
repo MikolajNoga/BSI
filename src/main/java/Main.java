@@ -1,6 +1,8 @@
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.lang.Math.exp;
 import static java.lang.Math.log;
@@ -10,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         scanner.useLocale(Locale.US);
+
         boolean flag = true;
         while(flag){
             System.out.println("Choice number: 0.Exit, 1.(01_04), 2.(02_02) " +
@@ -73,9 +76,8 @@ public class Main {
                         } else
                             System.out.println(exercise_01_06());
 
-                        break;
                     case 5:
-                        if (askForWillingnessToProvideVariables(scanner)) {
+                    if (askForWillingnessToProvideVariables(scanner)) {
                             System.out.println("(double reliability, int time)\n\n" +
                                     "reliability (double : >0 && <1) - probability that a product will perform a required function\n" +
                                     "time (int : >0) - period of time");
@@ -307,4 +309,12 @@ public class Main {
         double MTBF = 1 / failureRate;
         return "Failure rate: " + failureRate + " , MTBF: " + MTBF;
     }
+
+    public void testMethod(){
+        int x = 13;
+        int y = x + 13;
+        y += x;
+        return;
+    }
+
 }
