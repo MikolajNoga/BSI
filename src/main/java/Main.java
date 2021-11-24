@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         scanner.useLocale(Locale.US);
-
+        Logger logger = Logger.getLogger(String.valueOf(Main.class));
         boolean flag = true;
         while(flag){
             System.out.println("Choice number: 0.Exit, 1.(01_04), 2.(02_02) " +
@@ -75,7 +75,7 @@ public class Main {
                             System.out.println(exercise_01_06(MTBF, time));
                         } else
                             System.out.println(exercise_01_06());
-
+                        break;
                     case 5:
                     if (askForWillingnessToProvideVariables(scanner)) {
                             System.out.println("(double reliability, int time)\n\n" +
@@ -92,10 +92,10 @@ public class Main {
                         System.out.println("Wrong number");
                 }
             } catch (InputMismatchException e){
-                System.out.println("You provided wrong type of variable");
+                logger.log(Level.INFO, "You provided wrong type of variable");
                 scanner.next();
             } catch (ValueOutOfTheRangeException e){
-                System.out.println(e.getMessage());
+                logger.log(Level.INFO, e.getMessage());
             }
         }
     }
@@ -308,13 +308,6 @@ public class Main {
         double failureRate = (1 - 0.95)/500;
         double MTBF = 1 / failureRate;
         return "Failure rate: " + failureRate + " , MTBF: " + MTBF;
-    }
-
-    public void testMethod(){
-        int x = 13;
-        int y = x + 13;
-        y += x;
-        return;
     }
 
 }
