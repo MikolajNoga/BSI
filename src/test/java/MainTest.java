@@ -1,3 +1,5 @@
+import CertificationExercises.Main;
+import CertificationExercises.ValueOutOfTheRangeException;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
