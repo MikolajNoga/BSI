@@ -8,6 +8,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * @author Mikołaj Noga, Szymon Jakóbiak
+ */
+
 public class Main{
 
     public static void main(String[] args) {

@@ -1,4 +1,8 @@
 package EncryptionExercises;
+
+/**
+ * @author Tolnai Andrei Ciprian
+ */
 public class Utils {
 
     /**

@@ -1,5 +1,8 @@
 package EncryptionExercises;
 
+/**
+ * @author Tolnai Andrei Ciprian
+ */
 public abstract class Encryption extends Utils {
 
     protected String name;
