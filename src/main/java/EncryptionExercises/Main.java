@@ -1,7 +1,11 @@
 package EncryptionExercises;
 
+import javax.crypto.NoSuchPaddingException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main{
@@ -14,23 +18,23 @@ public class Main{
 
         System.out.println("Choice encryption algorithm.\n1.AES\n2.DES\n3.3DES");
         int choice = scanner.nextInt();
-
+        String encryptDecryptChoice = "";
         switch (choice){
             case 1:
                 System.out.println("Choose 1 to encrypt files, or 2 to decrypt");
-                String choice1  = scanner.next();
-                if (choice1.equals("1")){
-                    for(final File fileEntry: testFolder.listFiles()) {
+                encryptDecryptChoice  = scanner.next();
+                if (encryptDecryptChoice.equals("1")){
+                    for(final File file: Objects.requireNonNull(testFolder.listFiles())) {
                         try {
-                            writeStringToFile(AES.encrypt(getStringFromFile(fileEntry), KEY),fileEntry);
+                            AES.encrypt(file, KEY);
                         } catch (IOException e){
                             System.out.println(e.getMessage());
                         }
                     }
-                }else if (choice1.equals("2")){
-                    for(final File fileEntry: testFolder.listFiles()) {
+                }else if (encryptDecryptChoice.equals("2")){
+                    for(final File file: Objects.requireNonNull(testFolder.listFiles())) {
                         try {
-                            writeStringToFile(AES.decrypt(getStringFromFile(fileEntry), KEY),fileEntry);
+                            AES.decrypt(file, KEY);
                         } catch (IOException e){
                             System.out.println(e.getMessage());
                         }
@@ -38,51 +42,57 @@ public class Main{
                 }else
                     System.out.println("You entered wrong number");
                 break;
+            case 2:
+                System.out.println("Choose 1 to encrypt files, or 2 to decrypt");
+                encryptDecryptChoice  = scanner.next();
+                if (encryptDecryptChoice.equals("1")){
+                    for(final File file: Objects.requireNonNull(testFolder.listFiles())) {
+                        DES des = new DES(KEY);
+                        try{
+                            AES.writeStringToFile(des.encrypt(AES.getStringFromFile(file)), file);
+                        } catch (IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                } else if (encryptDecryptChoice.equals("2")){
+                    for(final File file: Objects.requireNonNull(testFolder.listFiles())) {
+                        DES des = new DES(KEY);
+                        try{
+                            AES.writeStringToFile(des.decrypt(AES.getStringFromFile(file)), file);
+                        } catch (IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                } else
+                    System.out.println("You entered wrong number");
+                break;
+            case 3:
+                System.out.println("Choose 1 to encrypt files, or 2 to decrypt");
+                encryptDecryptChoice  = scanner.next();
+                if (encryptDecryptChoice.equals("1")){
+                    for(final File file: Objects.requireNonNull(testFolder.listFiles())) {
+                        IDEA idea = new IDEA(KEY);
+                        try{
+                            AES.writeStringToFile(idea.encrypt(AES.getStringFromFile(file)), file);
+                        } catch (IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                } else if (encryptDecryptChoice.equals("2")){
+                    for(final File file: Objects.requireNonNull(testFolder.listFiles())) {
+                        IDEA idea = new IDEA(KEY);
+                        try{
+                            AES.writeStringToFile(idea.decrypt(AES.getStringFromFile(file)), file);
+                        } catch (IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                } else
+                    System.out.println("You entered wrong number");
+                break;
             default:
+                System.out.println("You entered wrong number");
         }
 
-    }
-
-    /**
-     * This method is getting the string from a file
-     *
-     * @param  file file where from where String is read
-     *
-     * @return stringBuilder.toString();
-     *
-     * @author Mikołaj Noga, Szymon Jakóbiak
-     */
-
-    private static String getStringFromFile(File file) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = null;
-        String ls = System.getProperty("line.separator");
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-            stringBuilder.append(ls);
-        }
-        // delete the last new line separator
-        //if (stringBuilder.length() >= 1)
-            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        reader.close();
-
-        return stringBuilder.toString();
-    }
-
-    /**
-     * This method is writing the string to a file
-     *
-     * @param  file file from where String is read
-     * @param  str string value in a file
-     *
-     * @author Mikołaj Noga, Szymon Jakóbiak
-     */
-
-    private static void writeStringToFile(String str, File file) throws  IOException {
-        FileWriter fileWriter = new FileWriter(file);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print(str);
-        printWriter.close();
     }
 }
