@@ -2,6 +2,12 @@ package BruteForcePasswordCrackingExercise;
 
 import java.util.Scanner;
 
+  /**
+  * 
+  * @author Mikołaj Noga, Szymon Jakóbiak
+  *
+  */
+
 public class Main {
     public static void main(String[] args) {
         Runnable[] runners = new Runnable[10];
