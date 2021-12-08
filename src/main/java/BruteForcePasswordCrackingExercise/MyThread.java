@@ -15,7 +15,16 @@ public class MyThread implements Runnable {
         guessPassword(password);
         System.exit(0);
     }
-
+    
+     /**
+     * password guessing method
+     *
+     * 
+     *
+     * @author Mikołaj Noga, Szymon Jakóbiak
+     *
+     */
+    
     private static void guessPassword(String password){
         Random rand = new Random();
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
