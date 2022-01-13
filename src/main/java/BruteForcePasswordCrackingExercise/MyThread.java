@@ -1,5 +1,7 @@
 package BruteForcePasswordCrackingExercise;
 
+import EncryptionExercises.DES;
+
 import java.util.Random;
 
 public class MyThread implements Runnable {
